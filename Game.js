@@ -42,7 +42,7 @@ Game.prototype.startGame = function () {
       this.update();
       this.clear();
       this.draw();
-      this.score();
+      this.scoreGrow();
       if (startCheckCollisions > 100) {
         this.checkCollisions();
       }
@@ -70,12 +70,24 @@ Game.prototype.draw = function () {
   this.food.draw();
 }
 
-Game.prototype.score = function () {
-  var score = (this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y);
+Game.prototype.scoreGrow = function () {
+
+  var score = false;
+
+  var downUp = (this.snake.direction === 'N' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y - this.snake.height);
+  var upDown = (this.snake.direction === 'S' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y + this.snake.height);
+  var leftRight = (this.snake.direction === 'E' && this.snake.positions[0].x === this.food.x - this.snake.width && this.snake.positions[0].y === this.food.y);
+  var rightLeft = (this.snake.direction === 'W' && this.snake.positions[0].x === this.food.x + this.snake.width && this.snake.positions[0].y === this.food.y);
+
+  if (leftRight || rightLeft || upDown || downUp) {score = true};
+
+  //var score = (this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y);
 
   if (score) {
     this.totalScore = this.totalScore + 10;
     this.newFood = true;
+    var newPositionSnake = {x: this.food.x,y:this.food.y};
+    this.snake.positions.push(newPositionSnake);
   }
 
   var scoreText = document.querySelector('#score');
