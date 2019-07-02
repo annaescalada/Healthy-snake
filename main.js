@@ -31,13 +31,14 @@ function main() {
     game.startGame();
     document.addEventListener('keydown',function(event) {
       if(event.key === 'ArrowDown') {
-        game.player.setDirection(1);
+        game.snake.setDirection('S');
       } else if (event.key === 'ArrowUp') {
-        game.player.setDirection(-1);
+        game.snake.setDirection('N');
+      } else if (event.key === 'ArrowRight') {
+        game.snake.setDirection('E');
+      } else if (event.key === 'ArrowLeft') {
+        game.snake.setDirection('W');
       }
-    });
-    document.addEventListener('keyup',function(event) {
-      game.player.setDirection(0);
     });
   }
 
