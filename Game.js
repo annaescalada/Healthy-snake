@@ -75,10 +75,10 @@ Game.prototype.score = function () {
     this.newFood = true;
   }
 
-  console.log(this.totalScore);
+  var scoreText = document.querySelector('#score');
+  scoreText.innerHTML = `Score = ${this.totalScore}`;
 
 }
-
 
 // Game.prototype.checkCollisions = function () {
 //   this.enemies.forEach((enemy, index) => {

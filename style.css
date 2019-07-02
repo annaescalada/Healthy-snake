@@ -70,7 +70,6 @@ p {
 
 
 
-
 /* ---- components ---- */
 
 .button {
@@ -93,4 +92,8 @@ section.testimonials {
 
 section.testimonials .button {
   margin-bottom: 10px;
+}
+
+#canvas {
+  background-color: black;
 }
