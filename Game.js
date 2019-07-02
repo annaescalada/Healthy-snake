@@ -22,8 +22,12 @@ Game.prototype.startGame = function () {
   this.food = new Food(this.canvas, randomX, randomY);
 
   var counter = 0;
+  var startCheckCollisions = 0;
+
   var loop = () => {
     counter += this.level * 10;
+    startCheckCollisions ++;
+
     if (this.newFood) {
       var canvasWithByObjectSize = this.canvas.width / this.snake.width;
       var randomX = this.snake.width * (Math.floor(Math.random() * (canvasWithByObjectSize)));
@@ -39,7 +43,9 @@ Game.prototype.startGame = function () {
       this.clear();
       this.draw();
       this.score();
-      //    this.checkCollisions();
+      if (startCheckCollisions > 100) {
+        this.checkCollisions();
+      }
     }
 
     if (!this.isGameOver) {
@@ -62,9 +68,6 @@ Game.prototype.clear = function () {
 Game.prototype.draw = function () {
   this.snake.draw();
   this.food.draw();
-  // this.enemies.forEach(function (enemy) {
-  //   enemy.draw();
-  // })
 }
 
 Game.prototype.score = function () {
@@ -80,22 +83,18 @@ Game.prototype.score = function () {
 
 }
 
-// Game.prototype.checkCollisions = function () {
-//   this.enemies.forEach((enemy, index) => {
-//     var rightLeft = this.player.x + this.player.width >= enemy.x;
-//     var leftRight = this.player.x <= enemy.x + enemy.width;
-//     var bottomTop = this.player.y + this.player.height >= enemy.y;
-//     var topBottom = this.player.y <= enemy.y + enemy.height;
+Game.prototype.checkCollisions = function () {
+  var collision = false;
+  this.snake.positions.forEach((position,index) => {
+    if (index > 0) {
+      collision = (this.snake.positions[0].x === position.x && this.snake.positions[0].y === position.y);
+      if (collision) {
+        this.isGameOver = true;
+      }
+    }
+  });
+}
 
-//     if (rightLeft && leftRight && bottomTop && topBottom) {
-//       this.enemies.splice(index,1);
-//       this.player.lives --;
-//       if (this.player.lives === 0) {
-//         this.isGameOver = true;
-//       }
-//     }
-//   });
-// }
 
 Game.prototype.gameOverCallback = function (callback) {
   this.onGameOver = callback;
