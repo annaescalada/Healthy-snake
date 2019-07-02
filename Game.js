@@ -16,36 +16,32 @@ Game.prototype.startGame = function () {
 
   this.snake = new Snake(this.canvas);
 
-  var canvasWithByObjectSize = this.canvas.width / this.snake.width;
-  var randomX = this.snake.width * (Math.floor(Math.random() * (canvasWithByObjectSize)));
-  var randomY = this.snake.width * (Math.floor(Math.random() * (canvasWithByObjectSize)));
+  var randomX = 25;
+  var randomY = 250;
   this.food = new Food(this.canvas, randomX, randomY);
 
   var counter = 0;
-  var startCheckCollisions = 0;
 
   var loop = () => {
-    counter += this.level * 10;
-    startCheckCollisions ++;
+    counter += this.level * 6;
 
     if (this.newFood) {
-      var canvasWithByObjectSize = this.canvas.width / this.snake.width;
-      var randomX = this.snake.width * (Math.floor(Math.random() * (canvasWithByObjectSize)));
-      var randomY = this.snake.width * (Math.floor(Math.random() * (canvasWithByObjectSize)));
+
+      randomX = this.randomize();
+      randomY = this.randomize();
       this.food = new Food(this.canvas, randomX, randomY);
       this.newFood = false;
     }
 
-    if (counter === 60) {
+    if (counter > 60) {
       counter = 0;
 
+      this.scoreGrow();
       this.update();
       this.clear();
       this.draw();
-      this.scoreGrow();
-      if (startCheckCollisions > 100) {
-        this.checkCollisions();
-      }
+      this.checkCollisions();
+      this.levelUp();
     }
 
     if (!this.isGameOver) {
@@ -66,38 +62,65 @@ Game.prototype.clear = function () {
 }
 
 Game.prototype.draw = function () {
-  this.snake.draw();
   this.food.draw();
+  this.snake.draw();
 }
 
 Game.prototype.scoreGrow = function () {
-
   var score = false;
+  console.log(this.snake.positions[0].x, this.food.x);
 
-  var downUp = (this.snake.direction === 'N' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y - this.snake.height);
-  var upDown = (this.snake.direction === 'S' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y + this.snake.height);
+  var downUp = (this.snake.direction === 'N' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y + this.snake.height);
+  var upDown = (this.snake.direction === 'S' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y - this.snake.height);
+
   var leftRight = (this.snake.direction === 'E' && this.snake.positions[0].x === this.food.x - this.snake.width && this.snake.positions[0].y === this.food.y);
   var rightLeft = (this.snake.direction === 'W' && this.snake.positions[0].x === this.food.x + this.snake.width && this.snake.positions[0].y === this.food.y);
 
-  if (leftRight || rightLeft || upDown || downUp) {score = true};
+  var downUpEnd = (this.snake.direction === 'N' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y + this.snake.height - this.canvas.height);
+  var upDownEnd = (this.snake.direction === 'S' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y - this.snake.height + this.canvas.height);
+  
+  var leftRightEnd = (this.snake.direction === 'E' && this.snake.positions[0].x === this.food.x - this.snake.width + this.canvas.width && this.snake.positions[0].y === this.food.y);
+  var rightLeftEnd = (this.snake.direction === 'W' && this.snake.positions[0].x === this.food.x + this.snake.width - this.canvas.width && this.snake.positions[0].y === this.food.y);
 
-  //var score = (this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y);
+  if (leftRight || rightLeft || upDown || downUp || leftRightEnd || rightLeftEnd || upDownEnd || downUpEnd) { score = true };
 
   if (score) {
     this.totalScore = this.totalScore + 10;
     this.newFood = true;
-    var newPositionSnake = {x: this.food.x,y:this.food.y};
-    this.snake.positions.push(newPositionSnake);
+    var newPositionSnake = { x: this.food.x, y: this.food.y };
+    this.snake.positions.unshift(newPositionSnake);
   }
 
   var scoreText = document.querySelector('#score');
   scoreText.innerHTML = `Score = ${this.totalScore}`;
+}
 
+Game.prototype.levelUp = function () {
+  switch (this.totalScore) {
+    case 100:
+      debugger;
+      this.level = 2;
+      break;
+    case 200:
+      this.level = 3;
+      break;
+    case 300:
+      this.level = 4;
+      break;
+    case 400:
+      this.level = 5;
+      break;
+    case 500:
+      this.level = 6;
+      break;
+  }
+  var levelText = document.querySelector('#level');
+  levelText.innerHTML = `Level = ${this.level}`;
 }
 
 Game.prototype.checkCollisions = function () {
   var collision = false;
-  this.snake.positions.forEach((position,index) => {
+  this.snake.positions.forEach((position, index) => {
     if (index > 0) {
       collision = (this.snake.positions[0].x === position.x && this.snake.positions[0].y === position.y);
       if (collision) {
@@ -107,7 +130,10 @@ Game.prototype.checkCollisions = function () {
   });
 }
 
-
 Game.prototype.gameOverCallback = function (callback) {
   this.onGameOver = callback;
+}
+
+Game.prototype.randomize = function () {
+  return (this.snake.width * (Math.floor(Math.random() * (this.canvas.width / this.snake.width))));
 }

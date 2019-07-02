@@ -24,6 +24,7 @@ function main() {
     <section>
       <canvas id="canvas" width="500px" height="500px"></canvas>
       <p id="score">Score = 0</p>
+      <p id="level">Level = 1</p>
     </section>
     `);
     var canvas = gameScreen.querySelector('canvas');

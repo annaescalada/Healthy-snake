@@ -6,19 +6,13 @@ function Snake(canvas) {
   this.height = 25;
   this.width = 25;
   this.positions = [
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 }
+    { x: 25, y: -25 },
+    { x: 25, y: -50 },
+    { x: 25, y: -75},
+    { x: 25, y: -100},
   ];
 
-  this.direction = 'E';
+  this.direction = 'N';
 
   this.color = 'blue';
 }
@@ -40,7 +34,7 @@ Snake.prototype.move = function () {
       break;
     case 'W':
       nextX -= this.width;  
-    break;
+      break;
   }
 
   if (nextX > (this.canvas.width - this.width)) {
