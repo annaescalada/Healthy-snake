@@ -27,16 +27,17 @@ function main() {
     `);
     var canvas = gameScreen.querySelector('canvas');
     var game = new Game(canvas);
+    console.log(game);
     game.gameOverCallback(createGameOverScreen);
     game.startGame();
-    document.addEventListener('keydown',function(event) {
-      if(event.key === 'ArrowDown') {
+    document.addEventListener('keydown',(event) => {
+      if(event.key === 'ArrowDown' && game.snake.direction !== 'N') {
         game.snake.setDirection('S');
-      } else if (event.key === 'ArrowUp') {
+      } else if (event.key === 'ArrowUp' && game.snake.direction !== 'S') {
         game.snake.setDirection('N');
-      } else if (event.key === 'ArrowRight') {
+      } else if (event.key === 'ArrowRight' && game.snake.direction !== 'W') {
         game.snake.setDirection('E');
-      } else if (event.key === 'ArrowLeft') {
+      } else if (event.key === 'ArrowLeft' && game.snake.direction !== 'E') {
         game.snake.setDirection('W');
       }
     });

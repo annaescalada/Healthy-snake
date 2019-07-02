@@ -2,32 +2,44 @@
 
 function Game(canvas) {
   this.snake = null;
-  this.enemies = [];
+  this.food = null;
+  this.newFood = false;
   this.isGameOver = false;
+  this.onGameOver = null;
   this.canvas = canvas;
   this.ctx = this.canvas.getContext('2d');
-  this.onGameOver = null;
   this.level = 1;
 }
 
 Game.prototype.startGame = function () {
 
   this.snake = new Snake(this.canvas);
+  var canvasWithByObjectSize = this.canvas.width / this.snake.width;
+  var randomX = this.snake.width * (Math.floor(Math.random() * (canvasWithByObjectSize)));
+  var randomY = this.snake.width * (Math.floor(Math.random() * (canvasWithByObjectSize)));
+  
+  this.food = new Food(this.canvas,randomX,randomY);
+
+  //create new food: random x random y this.food = Food (randomx, randomy)
+
   var counter = 0;
   var loop = () => {
     counter += this.level * 10;
-  //   if (Math.random() > 0.97) {
-  //     var randomY = Math.random() * this.canvas.height - 10;
-  //     var newEnemy = new Enemy(this.canvas, randomY);
-  //     this.enemies.push(newEnemy);
-  //   }
+    if (this.newFood) {
+      var canvasWithByObjectSize = this.canvas.width / this.snake.width;
+      var randomX = this.snake.width * (Math.floor(Math.random() * (canvasWithByObjectSize)));
+      var randomY = this.snake.width * (Math.floor(Math.random() * (canvasWithByObjectSize)));
+      this.food = new Food(this.canvas,randomX,randomY);
+    }
+ 
     if (counter === 60) {
       counter = 0;
+
       this.update();
       this.clear();
       this.draw();
-    }
 //    this.checkCollisions();
+    }
 
     if(!this.isGameOver) {
       requestAnimationFrame(loop);
@@ -40,9 +52,6 @@ Game.prototype.startGame = function () {
 
 Game.prototype.update = function () {
   this.snake.move();
-  //this.enemies.forEach(function (enemy) {
-  //  enemy.move();
-  //})
 }
 
 Game.prototype.clear = function () {
@@ -51,10 +60,16 @@ Game.prototype.clear = function () {
 
 Game.prototype.draw = function () {
   this.snake.draw();
+  this.food.draw();
   // this.enemies.forEach(function (enemy) {
   //   enemy.draw();
   // })
 }
+
+// Game.prototypeScore {
+
+// }
+
 
 // Game.prototype.checkCollisions = function () {
 //   this.enemies.forEach((enemy, index) => {

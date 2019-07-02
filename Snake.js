@@ -3,18 +3,14 @@
 function Snake(canvas) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
-  this.height = 10;
-  this.width = 10;
+  this.height = 25;
+  this.width = 25;
   this.positions = [
-    { x: 80, y: this.canvas.height / 2 - this.height / 2 },
-    { x: 70, y: this.canvas.height / 2 - this.height / 2 },
-    { x: 60, y: this.canvas.height / 2 - this.height / 2 },
-    { x: 50, y: this.canvas.height / 2 - this.height / 2 }
+    { x: 0, y: 0 },
+    { x: 0, y: 0 },
+    { x: 0, y: 0 },
+    { x: 0, y: 0 }
   ];
-
-  //this.x = 20;
-  //this.y = (this.canvas.height / 2) - this.height / 2;
-  //this.lifes = 3;
 
   this.direction = 'E';
 
@@ -41,23 +37,17 @@ Snake.prototype.move = function () {
     break;
   }
 
-  // var nextX = this.positions[0].x + this.horizontalDirection * this.velocity * this.width;
-
-  if (nextX > this.canvas.width) {
+  if (nextX > (this.canvas.width - this.width)) {
     nextX = nextX - this.canvas.width;
   } else if (nextX < 0) {
     nextX = nextX + this.canvas.width;
   }
 
-  
-  // var nextY = this.positions[0].y + this.verticalDirection * this.velocity * this.height;
-  
-  if (nextY > this.canvas.height) {
+  if (nextY > (this.canvas.height - this.width)) {
     nextY = nextY - this.canvas.width;
   } else if (nextY < 0) {
     nextY = nextY + this.canvas.width;
   }
-  
   
   for (var i = this.positions.length - 1; i > 0; i--) {
     this.positions[i].x = this.positions[i - 1].x;
