@@ -23,7 +23,8 @@ Game.prototype.startGame = function () {
   var counter = 0;
 
   var loop = () => {
-    counter += ((2** this.level) / this.level) + 3 * this.level;
+    //counter += ((2** this.level) / this.level) + 3 * this.level;
+    counter += this.setSpeed();
 
     if (this.newFood) {
       randomX = this.randomize();
@@ -101,20 +102,19 @@ Game.prototype.findFood = function () {
 Game.prototype.levelUp = function () {
   switch (this.totalScore) {
     case 50:
-      debugger;
-      this.level = 2;
+      this.level = 8;
       break;
     case 100:
-      this.level = 3;
+      this.level = 12;
       break;
     case 200:
-      this.level = 4;
+      this.level = 16;
       break;
     case 300:
-      this.level = 5;
+      this.level = 20;
       break;
     case 600:
-      this.level = 6;
+      this.level = 24;
       break;
   }
   var levelText = document.querySelector('#canvas-level');
@@ -170,4 +170,29 @@ Game.prototype.styleCanvas = function styleCanvas(canvas, unitSize) {
     }
   }
 
+}
+
+Game.prototype.setSpeed =function () {
+  var speed = 0;
+  switch (this.level) {
+    case  1:
+      speed = 3;
+      break;
+    case 2:
+      speed = 3;
+      break;
+    case 3:
+      speed = 5;
+      break;
+    case 4:
+      speed = 6;
+      break;
+    case 5:
+      speed = 6;
+      break;
+    case 6:
+      speed = 6;
+      break;
+  }
+  return speed;
 }
