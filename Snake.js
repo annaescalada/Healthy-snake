@@ -12,6 +12,7 @@ function Snake(canvas) {
   ];
 
   this.direction = 'E';
+  this.isClicked = false;
 
   this.color = '#4673E9';
 }
@@ -75,5 +76,17 @@ Snake.prototype.draw = function() {
 }
 
 Snake.prototype.setDirection = function (newDirection) {
-  this.direction = newDirection;
+  console.log(this)
+
+  if(!this.isClicked) {
+    this.setCliked();
+    this.isClicked = true;
+    this.direction = newDirection;
+  }
+}
+
+Snake.prototype.setCliked = function() {
+  setTimeout(() => {
+    this.isClicked = false;
+  }, 200)
 }

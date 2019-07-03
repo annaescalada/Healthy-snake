@@ -1,10 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap');
 
+@import url('https://fonts.googleapis.com/css?family=Barriecito&display=swap');
 /* ---- reset ---- */
 
 html {
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  //font-family: 'Luckiest Guy', cursive;
+  font-family: 'Barriecito', cursive;
+  letter-spacing: 2;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -83,8 +86,9 @@ p {
 
 section {
   width: 550px;
-  height: 580px;
+  height: 630px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .flex-col-end {
@@ -97,7 +101,6 @@ section {
   border: solid 25px #578A34;
 }
 #game-score-level {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: white;
   background-color: #4A752C;
   border-top: solid 10px #4A752C;
@@ -110,6 +113,39 @@ section {
 
 .homescreen {
   background-color: #50C0FB;
+  position:relative;
+}
+
+.homescreen img {
+  position:absolute;
+}
+
+.image1 {
+  width:25px;
+  top: 10%;
+  left: 20%;
+}
+
+.image2 {
+  width:40px;
+  top: 30%;
+  right: 15%;
+}
+.image3 {
+  width:40px;
+  top: 60%;
+  left: 5%;
+}
+.image4 {
+  width:30px;
+  top: 90%;
+  right: 10%;
+}
+
+.image5 {
+  width:40px;
+  top: 100%;
+  right: 70%;
 }
 
 .homescreen div {
@@ -119,25 +155,31 @@ section {
 
 .homescreen div:first-child{
   align-items: center;
-  padding: 20px;
   position: relative;
 }
 
 .homescreen div:first-child h1{
   font-size: 60px;
-  margin: 6rem;
-  color: #a2d149;
+  margin: 3rem;
+  color: black;
+}
+
+.homescreen div:first-child h2{
+  font-size: 25px;
+  margin: 2rem;
+  color: rgb(20, 20, 20);
 }
 
 .homescreen div:first-child button{
-
   background-color: #2158e8;
   color: white;
   border: none;
-  padding: 10px 25px;
+  padding: 15px 32px;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 24px;
   text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom:5px;
 }
 
 .homescreen div:first-child button:hover{
@@ -147,26 +189,27 @@ section {
     cursor: pointer;
 }
 
-.random {
-  width: 10px!important;
-  height: 10px!important;
-  background-color: black;
-  animation-duration: 3s;
+.snake {
+  width: 400px!important;
+  height: 40px!important;
+  background-color: #4673E9;
+  border: 2px solid #16419A;
+  animation-duration: 100s;
   animation-name: slidein;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 70%;
+  left: 0;
 }
 
 @keyframes slidein {
   from {
-    top: 0;
-    left: 0;
+    top: 77%;
+    left: -50%;
   }
 
   to {
-    top: 50%;
-    left: 50%;
+    top: 77%;
+    left: 200%;
   }
 }
 

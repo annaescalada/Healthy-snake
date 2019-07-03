@@ -94,31 +94,40 @@ Game.prototype.findFood = function () {
     this.newFood = true;
     var newPositionSnake = { x: this.food.x, y: this.food.y };
     this.snake.positions.unshift(newPositionSnake);
+    var scoreText = document.querySelector('#canvas-score');
+    scoreText.innerHTML = `<img id="apple-icon" src="./Apple-icon.png" height="${this.snake.size}"> Score = ${this.totalScore}`;
   }
-  var scoreText = document.querySelector('#canvas-score');
-  scoreText.innerHTML = `<img id="apple-icon" src="./Apple-icon.png" height="${this.snake.size}"> Score = ${this.totalScore}`;
 }
 
 Game.prototype.levelUp = function () {
+  var newLevel = false;
   switch (this.totalScore) {
     case 50:
       this.level = 2;
+      newLevel = true;
       break;
     case 100:
       this.level = 3;
+      newLevel = true;
       break;
     case 200:
       this.level = 4;
+      newLevel = true;
       break;
     case 300:
       this.level = 5;
+      newLevel = true;
       break;
     case 600:
       this.level = 6;
+      newLevel = true;
       break;
   }
-  var levelText = document.querySelector('#canvas-level');
-  levelText.innerHTML = `<img id="apple-icon" src="./Trophy-icon.svg" height="${this.snake.size}"> Level = ${this.level}`;
+  if (newLevel) {
+    var levelText = document.querySelector('#canvas-level');
+    levelText.innerHTML = `<img id="apple-icon" src="./Trophy-icon.svg" height="${this.snake.size}"> Level = ${this.level}`;
+    newLevel = false;
+  }
 }
 
 Game.prototype.checkCollisions = function () {
