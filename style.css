@@ -68,8 +68,6 @@ p {
   }
 }
 
-
-
 /* ---- components ---- */
 
 .button {
@@ -86,14 +84,19 @@ p {
 
 /* ---- section ---- */
 
-section.testimonials {
-  // ...
-}
-
-section.testimonials .button {
-  margin-bottom: 10px;
+section {
+  width: 550px;
 }
 
 #canvas {
-  background-color: black;
+  border: solid 25px #578A34;
+}
+#game-score-level {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: white;
+  background-color: #4A752C;
+  border-top: solid 10px #4A752C;
+  border-bottom: solid 10px #4A752C;
+  border-left: solid 30px #4A752C;
+  border-right: solid 30px #4A752C;
 }

@@ -3,18 +3,17 @@
 function Snake(canvas) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
-  this.height = 25;
-  this.width = 25;
+  this.size = 25;
   this.positions = [
     { x: 0, y: 0 },
-    { x: 0, y: -1 * this.widt},
-    { x: 0, y: -2 * this.width},
-    { x: 0, y: -3 * this.width}
+    { x: 0, y: -1 * this.size},
+    { x: 0, y: -2 * this.size},
+    { x: 0, y: -3 * this.size}
   ];
 
   this.direction = 'E';
 
-  this.color = 'blue';
+  this.color = '#4673E9';
 }
 
 Snake.prototype.move = function () {
@@ -24,29 +23,29 @@ Snake.prototype.move = function () {
 
   switch (this.direction) {
     case 'N':
-      nextY -= this.height;
+      nextY -= this.size;
       break;
     case 'S':
-      nextY += this.height;
+      nextY += this.size;
       break;
     case 'E':
-      nextX += this.width;
+      nextX += this.size;
       break;
     case 'W':
-      nextX -= this.width;  
+      nextX -= this.size;  
       break;
   }
 
-  if (nextX > (this.canvas.width - this.width)) {
+  if (nextX > (this.canvas.width - this.size)) {
     nextX = nextX - this.canvas.width;
   } else if (nextX < 0) {
     nextX = nextX + this.canvas.width;
   }
 
-  if (nextY > (this.canvas.height - this.width)) {
-    nextY = nextY - this.canvas.width;
+  if (nextY > (this.canvas.height - this.size)) {
+    nextY = nextY - this.canvas.height;
   } else if (nextY < 0) {
-    nextY = nextY + this.canvas.width;
+    nextY = nextY + this.canvas.height;
   }
   
   for (var i = this.positions.length - 1; i > 0; i--) {
@@ -60,8 +59,11 @@ Snake.prototype.move = function () {
 
 Snake.prototype.draw = function() {
   this.ctx.fillStyle = this.color;
-  this.positions.forEach((position) => {
-    this.ctx.fillRect(position.x, position.y, this.width, this.height);
+  this.positions.forEach((position,index) => {
+   // if (index === 0) {
+        
+   // }
+    this.ctx.fillRect(position.x, position.y, this.size, this.size);
   });
 }
 

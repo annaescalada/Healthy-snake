@@ -22,14 +22,15 @@ function main() {
   function createGameScreen() {
     var gameScreen = buildDom(`
     <section>
+      <div id="game-score-level">
+        <p id="canvas-score">Score = 0</p>
+        <p id="canvas-level">Level = 1</p>
+      </div>
       <canvas id="canvas" width="500px" height="500px"></canvas>
-      <p id="canvas-score">Score = 0</p>
-      <p id="canvas-level">Level = 1</p>
     </section>
     `);
     var canvas = gameScreen.querySelector('canvas');
     var game = new Game(canvas);
-    console.log(game);
     game.gameOverCallback(()=>{createGameOverScreen(game.totalScore,game.level)});
     game.startGame();
     document.addEventListener('keydown',(event) => {

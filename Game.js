@@ -43,6 +43,7 @@ Game.prototype.startGame = function () {
       this.findFood();
       this.update();
       this.clear();
+      this.styleCanvas(this.canvas,this.snake.size);
       this.draw();
       this.checkCollisions();
       this.levelUp();
@@ -72,19 +73,18 @@ Game.prototype.draw = function () {
 
 Game.prototype.findFood = function () {
   var findFood = false;
-  console.log(this.snake.positions[0].x, this.food.x);
 
-  var downUp = (this.snake.direction === 'N' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y + this.snake.height);
-  var upDown = (this.snake.direction === 'S' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y - this.snake.height);
+  var downUp = (this.snake.direction === 'N' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y + this.snake.size);
+  var upDown = (this.snake.direction === 'S' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y - this.snake.size);
 
-  var leftRight = (this.snake.direction === 'E' && this.snake.positions[0].x === this.food.x - this.snake.width && this.snake.positions[0].y === this.food.y);
-  var rightLeft = (this.snake.direction === 'W' && this.snake.positions[0].x === this.food.x + this.snake.width && this.snake.positions[0].y === this.food.y);
+  var leftRight = (this.snake.direction === 'E' && this.snake.positions[0].x === this.food.x - this.snake.size && this.snake.positions[0].y === this.food.y);
+  var rightLeft = (this.snake.direction === 'W' && this.snake.positions[0].x === this.food.x + this.snake.size && this.snake.positions[0].y === this.food.y);
 
-  var downUpEnd = (this.snake.direction === 'N' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y + this.snake.height - this.canvas.height);
-  var upDownEnd = (this.snake.direction === 'S' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y - this.snake.height + this.canvas.height);
+  var downUpEnd = (this.snake.direction === 'N' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y + this.snake.size - this.canvas.height);
+  var upDownEnd = (this.snake.direction === 'S' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y - this.snake.size + this.canvas.height);
   
-  var leftRightEnd = (this.snake.direction === 'E' && this.snake.positions[0].x === this.food.x - this.snake.width + this.canvas.width && this.snake.positions[0].y === this.food.y);
-  var rightLeftEnd = (this.snake.direction === 'W' && this.snake.positions[0].x === this.food.x + this.snake.width - this.canvas.width && this.snake.positions[0].y === this.food.y);
+  var leftRightEnd = (this.snake.direction === 'E' && this.snake.positions[0].x === this.food.x - this.snake.size + this.canvas.width && this.snake.positions[0].y === this.food.y);
+  var rightLeftEnd = (this.snake.direction === 'W' && this.snake.positions[0].x === this.food.x + this.snake.size - this.canvas.width && this.snake.positions[0].y === this.food.y);
 
   if (leftRight || rightLeft || upDown || downUp || leftRightEnd || rightLeftEnd || upDownEnd || downUpEnd) { findFood = true };
 
@@ -95,7 +95,7 @@ Game.prototype.findFood = function () {
     this.snake.positions.unshift(newPositionSnake);
   }
   var scoreText = document.querySelector('#canvas-score');
-  scoreText.innerHTML = `Score = ${this.totalScore}`;
+  scoreText.innerHTML = `<img id="apple-icon" src="./Apple-icon.png" height="${this.snake.size}"> Score = ${this.totalScore}`;
 }
 
 Game.prototype.levelUp = function () {
@@ -118,7 +118,7 @@ Game.prototype.levelUp = function () {
       break;
   }
   var levelText = document.querySelector('#canvas-level');
-  levelText.innerHTML = `Level = ${this.level}`;
+  levelText.innerHTML = `<img id="apple-icon" src="./Trophy-icon.svg" height="${this.snake.size}"> Level = ${this.level}`;
 }
 
 Game.prototype.checkCollisions = function () {
@@ -138,7 +138,7 @@ Game.prototype.gameOverCallback = function (callback) {
 }
 
 Game.prototype.randomize = function () {
-  return (this.snake.width * (Math.floor(Math.random() * (this.canvas.width / this.snake.width))));
+  return (this.snake.size * (Math.floor(Math.random() * (this.canvas.width / this.snake.size))));
 }
 
 Game.prototype.checkInSnake = function (randomX,randomY) {
@@ -147,4 +147,27 @@ Game.prototype.checkInSnake = function (randomX,randomY) {
       return true;
     }
   });
+}
+
+Game.prototype.styleCanvas = function styleCanvas(canvas, unitSize) {
+  var ctx = canvas.getContext('2d');
+  var columns = canvas.width / unitSize;
+  var rows = canvas.height / unitSize;
+  for (var i = 0; i < columns + 1; i++) {
+    for (var ii = 0; ii < rows; ii += 2) {
+      if (i % 2 === 0) {
+        ctx.fillStyle = '#AAD751';
+      } else {
+        ctx.fillStyle = '#A2D149';
+      }
+      ctx.fillRect(i * unitSize,ii * unitSize,unitSize,unitSize)
+      if (i % 2 !== 0) {
+        ctx.fillStyle = '#AAD751';
+      } else {
+        ctx.fillStyle = '#A2D149';
+      }
+      ctx.fillRect(i * unitSize, (ii+1) * unitSize, unitSize, unitSize);
+    }
+  }
+
 }
