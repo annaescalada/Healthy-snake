@@ -102,19 +102,19 @@ Game.prototype.findFood = function () {
 Game.prototype.levelUp = function () {
   switch (this.totalScore) {
     case 50:
-      this.level = 8;
+      this.level = 2;
       break;
     case 100:
-      this.level = 12;
+      this.level = 3;
       break;
     case 200:
-      this.level = 16;
+      this.level = 4;
       break;
     case 300:
-      this.level = 20;
+      this.level = 5;
       break;
     case 600:
-      this.level = 24;
+      this.level = 6;
       break;
   }
   var levelText = document.querySelector('#canvas-level');
@@ -169,29 +169,28 @@ Game.prototype.styleCanvas = function styleCanvas(canvas, unitSize) {
       ctx.fillRect(i * unitSize, (ii+1) * unitSize, unitSize, unitSize);
     }
   }
-
 }
 
 Game.prototype.setSpeed =function () {
   var speed = 0;
   switch (this.level) {
     case  1:
-      speed = 3;
+      speed = 4;
       break;
     case 2:
-      speed = 3;
+      speed = 6;
       break;
     case 3:
-      speed = 5;
+      speed = 8;
       break;
     case 4:
-      speed = 6;
+      speed = 10;
       break;
     case 5:
-      speed = 6;
+      speed = 12;
       break;
     case 6:
-      speed = 6;
+      speed = 14;
       break;
   }
   return speed;

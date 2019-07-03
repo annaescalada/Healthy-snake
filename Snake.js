@@ -58,12 +58,19 @@ Snake.prototype.move = function () {
 }
 
 Snake.prototype.draw = function() {
+  this.ctx.fillStyle ='#16419A';
+  this.positions.forEach((position,index) => {
+    // if (index === 0) {
+         
+    // }
+     this.ctx.fillRect(position.x, position.y, this.size, this.size);
+  });
   this.ctx.fillStyle = this.color;
   this.positions.forEach((position,index) => {
    // if (index === 0) {
         
    // }
-    this.ctx.fillRect(position.x, position.y, this.size, this.size);
+    this.ctx.fillRect(position.x + 1, position.y + 1, this.size - 2, this.size - 2);
   });
 }
 
