@@ -6,13 +6,13 @@ function Snake(canvas) {
   this.height = 25;
   this.width = 25;
   this.positions = [
-    { x: 25, y: -25 },
-    { x: 25, y: -50 },
-    { x: 25, y: -75},
-    { x: 25, y: -100},
+    { x: 0, y: 0 },
+    { x: 0, y: -1 * this.widt},
+    { x: 0, y: -2 * this.width},
+    { x: 0, y: -3 * this.width}
   ];
 
-  this.direction = 'N';
+  this.direction = 'E';
 
   this.color = 'blue';
 }

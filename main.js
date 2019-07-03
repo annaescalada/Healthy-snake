@@ -23,14 +23,14 @@ function main() {
     var gameScreen = buildDom(`
     <section>
       <canvas id="canvas" width="500px" height="500px"></canvas>
-      <p id="score">Score = 0</p>
-      <p id="level">Level = 1</p>
+      <p id="canvas-score">Score = 0</p>
+      <p id="canvas-level">Level = 1</p>
     </section>
     `);
     var canvas = gameScreen.querySelector('canvas');
     var game = new Game(canvas);
     console.log(game);
-    game.gameOverCallback(createGameOverScreen);
+    game.gameOverCallback(()=>{createGameOverScreen(game.totalScore,game.level)});
     game.startGame();
     document.addEventListener('keydown',(event) => {
       if(event.key === 'ArrowDown' && game.snake.direction !== 'N') {
@@ -45,10 +45,12 @@ function main() {
     });
   }
 
-  function createGameOverScreen() {
+  function createGameOverScreen(score,level) {
     var gameOverScreen = buildDom (`
     <section>
       <h1>Game Over</h1>
+      <p id="gameover-score">Score = ${score}</p>
+      <p id="gameover-level">Level = ${level}</p>
       <button>Restart</button>
     </section>
     `);

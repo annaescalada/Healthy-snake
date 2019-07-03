@@ -16,19 +16,23 @@ Game.prototype.startGame = function () {
 
   this.snake = new Snake(this.canvas);
 
-  var randomX = 25;
-  var randomY = 250;
+  var randomX = this.randomize();
+  var randomY = this.randomize();
   this.food = new Food(this.canvas, randomX, randomY);
 
   var counter = 0;
 
   var loop = () => {
-    counter += this.level * 6;
+    counter += ((2** this.level) / this.level) + 3 * this.level;
 
     if (this.newFood) {
-
       randomX = this.randomize();
       randomY = this.randomize();
+      while (this.checkInSnake(randomX,randomY)) {
+        randomX = this.randomize();
+        randomY = this.randomize();
+      }
+    
       this.food = new Food(this.canvas, randomX, randomY);
       this.newFood = false;
     }
@@ -36,7 +40,7 @@ Game.prototype.startGame = function () {
     if (counter > 60) {
       counter = 0;
 
-      this.scoreGrow();
+      this.findFood();
       this.update();
       this.clear();
       this.draw();
@@ -66,8 +70,8 @@ Game.prototype.draw = function () {
   this.snake.draw();
 }
 
-Game.prototype.scoreGrow = function () {
-  var score = false;
+Game.prototype.findFood = function () {
+  var findFood = false;
   console.log(this.snake.positions[0].x, this.food.x);
 
   var downUp = (this.snake.direction === 'N' && this.snake.positions[0].x === this.food.x && this.snake.positions[0].y === this.food.y + this.snake.height);
@@ -82,39 +86,38 @@ Game.prototype.scoreGrow = function () {
   var leftRightEnd = (this.snake.direction === 'E' && this.snake.positions[0].x === this.food.x - this.snake.width + this.canvas.width && this.snake.positions[0].y === this.food.y);
   var rightLeftEnd = (this.snake.direction === 'W' && this.snake.positions[0].x === this.food.x + this.snake.width - this.canvas.width && this.snake.positions[0].y === this.food.y);
 
-  if (leftRight || rightLeft || upDown || downUp || leftRightEnd || rightLeftEnd || upDownEnd || downUpEnd) { score = true };
+  if (leftRight || rightLeft || upDown || downUp || leftRightEnd || rightLeftEnd || upDownEnd || downUpEnd) { findFood = true };
 
-  if (score) {
+  if (findFood) {
     this.totalScore = this.totalScore + 10;
     this.newFood = true;
     var newPositionSnake = { x: this.food.x, y: this.food.y };
     this.snake.positions.unshift(newPositionSnake);
   }
-
-  var scoreText = document.querySelector('#score');
+  var scoreText = document.querySelector('#canvas-score');
   scoreText.innerHTML = `Score = ${this.totalScore}`;
 }
 
 Game.prototype.levelUp = function () {
   switch (this.totalScore) {
-    case 100:
+    case 50:
       debugger;
       this.level = 2;
       break;
-    case 200:
+    case 100:
       this.level = 3;
       break;
-    case 300:
+    case 200:
       this.level = 4;
       break;
-    case 400:
+    case 300:
       this.level = 5;
       break;
-    case 500:
+    case 600:
       this.level = 6;
       break;
   }
-  var levelText = document.querySelector('#level');
+  var levelText = document.querySelector('#canvas-level');
   levelText.innerHTML = `Level = ${this.level}`;
 }
 
@@ -136,4 +139,12 @@ Game.prototype.gameOverCallback = function (callback) {
 
 Game.prototype.randomize = function () {
   return (this.snake.width * (Math.floor(Math.random() * (this.canvas.width / this.snake.width))));
+}
+
+Game.prototype.checkInSnake = function (randomX,randomY) {
+  this.snake.positions.forEach((position) => {
+    if (position.x === randomX && position.y === randomY) {
+      return true;
+    }
+  });
 }
