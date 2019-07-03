@@ -1,12 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap');
 
 @import url('https://fonts.googleapis.com/css?family=Barriecito&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Bungee&display=swap');
+
 /* ---- reset ---- */
 
 html {
   box-sizing: border-box;
-  //font-family: 'Luckiest Guy', cursive;
-  font-family: 'Barriecito', cursive;
+  /*font-family: 'Luckiest Guy', cursive;
+  font-family: 'Barriecito', cursive;*/
+  font-family: 'Bungee', cursive;
   letter-spacing: 2;
 }
 *, *:before, *:after {
@@ -165,7 +169,7 @@ section {
 }
 
 .homescreen div:first-child h2{
-  font-size: 25px;
+  font-size: 20px;
   margin: 2rem;
   color: rgb(20, 20, 20);
 }

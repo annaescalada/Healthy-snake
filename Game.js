@@ -47,7 +47,6 @@ Game.prototype.startGame = function () {
       this.styleCanvas(this.canvas,this.snake.size);
       this.draw();
       this.checkCollisions();
-      this.levelUp();
     }
 
     if (!this.isGameOver) {
@@ -96,6 +95,7 @@ Game.prototype.findFood = function () {
     this.snake.positions.unshift(newPositionSnake);
     var scoreText = document.querySelector('#canvas-score');
     scoreText.innerHTML = `<img id="apple-icon" src="./Apple-icon.png" height="${this.snake.size}"> Score = ${this.totalScore}`;
+    this.levelUp();
   }
 }
 
