@@ -1,7 +1,7 @@
 # Snake
 
 ## Description
-The player controls a snake and has to eat apples that appear randomnly on a bordered canvas. The player loses when the snake runs into itself.
+The player controls a snake and has to eat apples that appear randomly on a bordered canvas. The player loses when the snake runs into itself.
 
 ## MVP (DOM - CANVAS)
 

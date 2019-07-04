@@ -149,11 +149,13 @@ Game.prototype.randomize = function () {
 }
 
 Game.prototype.checkInSnake = function (randomX,randomY) {
+  var inSnake = false;
   this.snake.positions.forEach((position) => {
     if (position.x === randomX && position.y === randomY) {
-      return true;
+      inSnake = true;
     }
   });
+  return inSnake;
 }
 
 Game.prototype.styleCanvas = function styleCanvas(canvas, unitSize) {
