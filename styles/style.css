@@ -272,7 +272,6 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAKElEQVQoU2
 #canvas {
   border: solid 25px #578A34;
   border-radius: 0 0 20px 20px;
-  box-shadow: 5px 5px 15px 5px #000000;
 }
 
 #game-score-level {
@@ -284,7 +283,6 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAKElEQVQoU2
   border-right: solid 25px #4A752C;
   width: 550px;
   border-radius: 20px 20px 0 0;
-  box-shadow: 5px 5px 15px 5px #000000;
 }
 
 #game-screen {

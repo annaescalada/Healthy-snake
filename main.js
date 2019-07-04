@@ -15,12 +15,12 @@ function main() {
           <h1>snake</h1>
           <h2>healthy snakes eat apples...</h2>
           <button>Start</button>
-          <img class="absolute image1" src="./Apple-icon.png">
-          <img class="absolute image2" src="./Apple-icon.png">
-          <img class="absolute image3" src="./Apple-icon.png">
-          <img class="absolute image4" src="./Apple-icon.png">
-          <img class="absolute image5" src="./Apple-icon.png">
-          <img class="absolute image6" src="./Apple-icon.png">
+          <img class="absolute image1" src="./styles/Apple-icon.png">
+          <img class="absolute image2" src="./styles/Apple-icon.png">
+          <img class="absolute image3" src="./styles/Apple-icon.png">
+          <img class="absolute image4" src="./styles/Apple-icon.png">
+          <img class="absolute image5" src="./styles/Apple-icon.png">
+          <img class="absolute image6" src="./styles/Apple-icon.png">
         </div>
         <div class="flex-col-end">
           <div></div>
@@ -39,12 +39,12 @@ function main() {
     
     <section class="homescreen">
       <div class="flex-col-end">
-        <img class="absolute image1" src="./Apple-icon.png">
-        <img class="absolute image2" src="./Apple-icon.png">
-        <img class="absolute image3" src="./Apple-icon.png">
-        <img class="absolute image4" src="./Apple-icon.png">
-        <img class="absolute image5" src="./Apple-icon.png">
-        <img class="absolute image6" src="./Apple-icon.png">
+        <img class="absolute image1" src="./styles/Apple-icon.png">
+        <img class="absolute image2" src="./styles/Apple-icon.png">
+        <img class="absolute image3" src="./styles/Apple-icon.png">
+        <img class="absolute image4" src="./styles/Apple-icon.png">
+        <img class="absolute image5" src="./styles/Apple-icon.png">
+        <img class="absolute image6" src="./styles/Apple-icon.png">
       </div>
       <div class="flex-col-end">
         <div></div>
@@ -54,8 +54,8 @@ function main() {
       <div class="snake3"></div>
       <div id="game-screen">
         <div id="game-score-level">
-          <p id="canvas-score"><img id="apple-icon" src="./Apple-icon.png" height="25"> Score = 0</p>
-          <p id="canvas-level"> <img id="apple-icon" src="./Trophy-icon.svg" height="25"> Level = 1</p>
+          <p id="canvas-score"><img id="styles/apple-icon" src="./styles/Apple-icon.png" height="25"> Score = 0</p>
+          <p id="canvas-level"> <img id="apple-icon" src="./styles/Trophy-icon.svg" height="25"> Level = 1</p>
         </div>
         <canvas id="canvas" width="500px" height="500px"></canvas>
       </div>
@@ -86,15 +86,15 @@ function main() {
     <section class="homescreen">
         <div class="flex-col-end">
           <h1>Game Over</h1>
-          <p id="gameover-score"><img id="apple-icon" src="./Apple-icon.png" height="25"> Score = ${score}</p>
-          <p id="gameover-level"><img id="apple-icon" src="./Trophy-icon.svg" height="25"> Level = ${level}</p>
+          <p id="gameover-score"><img id="apple-icon" src="./styles/Apple-icon.png" height="25"> Score = ${score}</p>
+          <p id="gameover-level"><img id="apple-icon" src="./styles/Trophy-icon.svg" height="25"> Level = ${level}</p>
           <button>Restart</button>
-          <img class="absolute image1" src="./Apple-icon.png">
-          <img class="absolute image2" src="./Apple-icon.png">
-          <img class="absolute image3" src="./Apple-icon.png">
-          <img class="absolute image4" src="./Apple-icon.png">
-          <img class="absolute image5" src="./Apple-icon.png">
-          <img class="absolute image6" src="./Apple-icon.png">
+          <img class="absolute image1" src="./styles/Apple-icon.png">
+          <img class="absolute image2" src="./styles/Apple-icon.png">
+          <img class="absolute image3" src="./styles/Apple-icon.png">
+          <img class="absolute image4" src="./styles/Apple-icon.png">
+          <img class="absolute image5" src="./styles/Apple-icon.png">
+          <img class="absolute image6" src="./styles/Apple-icon.png">
         </div>
         <div class="flex-col-end">
           <div></div>

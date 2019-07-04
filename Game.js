@@ -10,6 +10,8 @@ function Game(canvas) {
   this.ctx = this.canvas.getContext('2d');
   this.totalScore = 0;
   this.level = 1;
+  this.backgroundMusic = new Audio('music/bensound-funkyelement.mp3');
+  this.eatSound = new Audio('music/zapsplat_multimedia_notification_chime_bell_008_26408.mp3');
 }
 
 Game.prototype.startGame = function () {
@@ -21,11 +23,9 @@ Game.prototype.startGame = function () {
   this.food = new Food(this.canvas, randomX, randomY);
 
   var counter = 0;
-
+  this.backgroundMusic.play();
   var loop = () => {
-    //counter += ((2** this.level) / this.level) + 3 * this.level;
     counter += this.setSpeed();
-
     if (this.newFood) {
       randomX = this.randomize();
       randomY = this.randomize();
@@ -33,14 +33,11 @@ Game.prototype.startGame = function () {
         randomX = this.randomize();
         randomY = this.randomize();
       }
-    
       this.food = new Food(this.canvas, randomX, randomY);
       this.newFood = false;
     }
-
     if (counter > 60) {
       counter = 0;
-
       this.findFood();
       this.update();
       this.clear();
@@ -48,11 +45,11 @@ Game.prototype.startGame = function () {
       this.draw();
       this.checkCollisions();
     }
-
     if (!this.isGameOver) {
       requestAnimationFrame(loop);
     } else {
       this.onGameOver();
+      this.backgroundMusic.pause();
     }
   }
   loop();
@@ -89,12 +86,13 @@ Game.prototype.findFood = function () {
   if (leftRight || rightLeft || upDown || downUp || leftRightEnd || rightLeftEnd || upDownEnd || downUpEnd) { findFood = true };
 
   if (findFood) {
+    this.eatSound.play();
     this.totalScore = this.totalScore + 10;
     this.newFood = true;
     var newPositionSnake = { x: this.food.x, y: this.food.y };
     this.snake.positions.unshift(newPositionSnake);
     var scoreText = document.querySelector('#canvas-score');
-    scoreText.innerHTML = `<img id="apple-icon" src="./Apple-icon.png" height="${this.snake.size}"> Score = ${this.totalScore}`;
+    scoreText.innerHTML = `<img id="apple-icon" src="./styles/Apple-icon.png" height="${this.snake.size}"> Score = ${this.totalScore}`;
     this.levelUp();
   }
 }
@@ -125,7 +123,7 @@ Game.prototype.levelUp = function () {
   }
   if (newLevel) {
     var levelText = document.querySelector('#canvas-level');
-    levelText.innerHTML = `<img id="apple-icon" src="./Trophy-icon.svg" height="${this.snake.size}"> Level = ${this.level}`;
+    levelText.innerHTML = `<img id="apple-icon" src="./styles/Trophy-icon.svg" height="${this.snake.size}"> Level = ${this.level}`;
     newLevel = false;
   }
 }
