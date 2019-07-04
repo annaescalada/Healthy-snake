@@ -1,16 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap');
 
-@import url('https://fonts.googleapis.com/css?family=Barriecito&display=swap');
-
-@import url('https://fonts.googleapis.com/css?family=Bungee&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister&display=swap');
 
 /* ---- reset ---- */
 
 html {
   box-sizing: border-box;
-  /*font-family: 'Luckiest Guy', cursive;
-  font-family: 'Barriecito', cursive;*/
+  /*
+  font-family: 'Luckiest Guy', cursive;
   font-family: 'Bungee', cursive;
+  font-family: 'Barriecito', cursive;
+  font-family: 'Cabin Sketch', cursive;
+  */
+  font-family: 'Love Ya Like A Sister', cursive;
   letter-spacing: 2;
 }
 *, *:before, *:after {
@@ -27,7 +29,7 @@ body {
 
 body {
   color: #111;
-  font-size: 16px;
+  font-size: 22px;
   line-height: 147%;
 }
 
@@ -60,7 +62,8 @@ p {
 }
 
 #site-main {
-  margin-bottom: 60px;
+  margin-bottom: 0px;
+  height:100vh;
 }
 
 .container {
@@ -89,8 +92,7 @@ p {
 /* ---- section ---- */
 
 section {
-  width: 550px;
-  height: 630px;
+  height: 100%;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -101,26 +103,14 @@ section {
   justify-content: flex-end;
 }
 
-#canvas {
-  border: solid 25px #578A34;
-}
-#game-score-level {
-  color: white;
-  background-color: #4A752C;
-  border-top: solid 10px #4A752C;
-  border-bottom: solid 10px #4A752C;
-  border-left: solid 30px #4A752C;
-  border-right: solid 30px #4A752C;
-}
-
-/* Homescreen */
+/* Homescreen splash and game over */
 
 .homescreen {
   background-color: #50C0FB;
   position:relative;
 }
 
-.homescreen img {
+.homescreen img.absolute {
   position:absolute;
 }
 
@@ -133,7 +123,7 @@ section {
 .image2 {
   width:40px;
   top: 30%;
-  right: 15%;
+  right: 9%;
 }
 .image3 {
   width:40px;
@@ -143,13 +133,19 @@ section {
 .image4 {
   width:30px;
   top: 90%;
-  right: 10%;
+  right: 15%;
 }
 
 .image5 {
   width:40px;
   top: 100%;
   right: 70%;
+}
+
+.image6 {
+  width:40px;
+  top: 5%;
+  right: 30%;
 }
 
 .homescreen div {
@@ -163,13 +159,13 @@ section {
 }
 
 .homescreen div:first-child h1{
-  font-size: 60px;
+  font-size: 80px;
   margin: 3rem;
   color: black;
 }
 
 .homescreen div:first-child h2{
-  font-size: 20px;
+  font-size: 40px;
   margin: 2rem;
   color: rgb(20, 20, 20);
 }
@@ -184,36 +180,121 @@ section {
   text-transform: uppercase;
   font-weight: bold;
   margin-bottom:5px;
+  margin-top: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 2px;
 }
 
 .homescreen div:first-child button:hover{
-    background-color: #fff;
-    color: #2158e8;
-    transition: 0.5s ease all;
-    cursor: pointer;
+  background-color: #fff;
+  color: #2158e8;
+  transition: 0.5s ease all;
+  cursor: pointer;
+}
+
+.homescreen div:nth-child(2) div {
+  height: 300px;
+  background:url(
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAKElEQVQoU2NcdT3wPwMa+PHrB7oQA+NQULjooieGZzjYODA9MwQUAgD09SrHUhwAQgAAAABJRU5ErkJggg==
+    ) repeat;
+  background-size: 70px;
 }
 
 .snake {
-  width: 400px!important;
+  width: 600px!important;
   height: 40px!important;
-  background-color: #4673E9;
-  border: 2px solid #16419A;
-  animation-duration: 100s;
-  animation-name: slidein;
+  border-radius: 60%;
+  animation: slidein 40s infinite;
   position: absolute;
-  top: 70%;
+  top: 77%;
   left: 0;
+  background:url(
+  data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHUlEQVQoU2N0K375n4EAuHBuIwPjqEJcoUSb4AEAz9Yxa0gpiRMAAAAASUVORK5CYII=
+     ) repeat;
 }
+
+
+.snake2 {
+  width: 400px!important;
+  height: 30px!important;
+  border-radius: 50%;
+  animation: slidein 50s infinite;
+  animation-delay: 5s;
+  animation-name: slidein2;
+  position: absolute;
+  top: 85%;
+  left: -60%;
+  background:url(
+    data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHUlEQVQoU2N0K375n4EAuHBuIwPjqEJcoUSb4AEAz9Yxa0gpiRMAAAAASUVORK5CYII=
+    ) repeat;
+  }
+  
+  .snake3 {
+    width: 600px!important;
+    height: 40px!important;
+    border-radius: 60%;
+    animation: slidein 50s infinite;
+    animation-delay: 20s;
+    position: absolute;
+    top: 70%;
+    left: -50%;
+    background:url(
+    data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHUlEQVQoU2N0K375n4EAuHBuIwPjqEJcoUSb4AEAz9Yxa0gpiRMAAAAASUVORK5CYII=
+       ) repeat;
+  }
 
 @keyframes slidein {
   from {
-    top: 77%;
-    left: -50%;
+    top: 70%;
+    left: -40%;
   }
 
   to {
-    top: 77%;
-    left: 200%;
+    top: 70%;
+    left: 110%;
   }
 }
+
+@keyframes slidein2 {
+  from {
+    top: 87%;
+    left: -60%;
+  }
+
+  to {
+    top: 87%;
+    left: 110%;
+  }
+}
+
+/* Game screen */
+
+#canvas {
+  border: solid 25px #578A34;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 5px 5px 15px 5px #000000;
+}
+
+#game-score-level {
+  color: white;
+  background-color: #4A752C;
+  border-top: solid 10px #4A752C;
+  border-bottom: solid 10px #4A752C;
+  border-left: solid 25px #4A752C;
+  border-right: solid 25px #4A752C;
+  width: 550px;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 5px 5px 15px 5px #000000;
+}
+
+#game-screen {
+  position: absolute;
+  top: 5%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
 

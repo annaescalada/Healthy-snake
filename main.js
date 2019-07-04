@@ -9,51 +9,60 @@ function main() {
   }
 
   function createSplashScreen() {
-    // var splashScreen = buildDom(`
-    //   <section class="splash flex">
-    //   <div class="header">
-    //     <h1>Snake</h1>
-    //     <button>Start</button>
-    //   </div>
-    //   <div class="footer-bg">
-    //     <canvas width="550px" height="250px"></canvas>
-    //   </div>
-    //   </section>
-    // `);
     var splashScreen = buildDom(`
       <section class="homescreen">
         <div class="flex-col-end">
-          <h1>Snake</h1>
-          <h2>Healthy snakes eat apples...</h2>
+          <h1>snake</h1>
+          <h2>healthy snakes eat apples...</h2>
           <button>Start</button>
-          <img class="image1" src="./Apple-icon.png">
-          <img class="image2" src="./Apple-icon.png">
-          <img class="image3" src="./Apple-icon.png">
-          <img class="image4" src="./Apple-icon.png">
-          <img class="image5" src="./Apple-icon.png">
+          <img class="absolute image1" src="./Apple-icon.png">
+          <img class="absolute image2" src="./Apple-icon.png">
+          <img class="absolute image3" src="./Apple-icon.png">
+          <img class="absolute image4" src="./Apple-icon.png">
+          <img class="absolute image5" src="./Apple-icon.png">
+          <img class="absolute image6" src="./Apple-icon.png">
         </div>
         <div class="flex-col-end">
-          <canvas width="550px" height="200px"></canvas>
+          <div></div>
         </div>
         <div class="snake"></div>
+        <div class="snake2"></div>
+        <div class="snake3"></div>
       </section>
     `);
     var startButton = splashScreen.querySelector('button');
     startButton.addEventListener('click', createGameScreen);
-
-    var canvas = splashScreen.querySelector('canvas');
-    styleCanvas(canvas, 25)
   }
 
   function createGameScreen() {
     var gameScreen = buildDom(`
-    <section>
-      <div id="game-score-level">
-        <p id="canvas-score"><img id="apple-icon" src="./Apple-icon.png" height="25"> Score = 0</p>
-        <p id="canvas-level"> <img id="apple-icon" src="./Trophy-icon.svg" height="25"> Level = 1</p>
+    
+    <section class="homescreen">
+      <div class="flex-col-end">
+        <img class="absolute image1" src="./Apple-icon.png">
+        <img class="absolute image2" src="./Apple-icon.png">
+        <img class="absolute image3" src="./Apple-icon.png">
+        <img class="absolute image4" src="./Apple-icon.png">
+        <img class="absolute image5" src="./Apple-icon.png">
+        <img class="absolute image6" src="./Apple-icon.png">
       </div>
-      <canvas id="canvas" width="500px" height="500px"></canvas>
+      <div class="flex-col-end">
+        <div></div>
+      </div>
+      <div class="snake"></div>
+      <div class="snake2"></div>
+      <div class="snake3"></div>
+      <div id="game-screen">
+        <div id="game-score-level">
+          <p id="canvas-score"><img id="apple-icon" src="./Apple-icon.png" height="25"> Score = 0</p>
+          <p id="canvas-level"> <img id="apple-icon" src="./Trophy-icon.svg" height="25"> Level = 1</p>
+        </div>
+        <canvas id="canvas" width="500px" height="500px"></canvas>
+      </div>
     </section>
+
+
+
     `);
     var canvas = gameScreen.querySelector('canvas');
     var game = new Game(canvas);
@@ -80,16 +89,18 @@ function main() {
           <p id="gameover-score"><img id="apple-icon" src="./Apple-icon.png" height="25"> Score = ${score}</p>
           <p id="gameover-level"><img id="apple-icon" src="./Trophy-icon.svg" height="25"> Level = ${level}</p>
           <button>Restart</button>
-          <img class="image1" src="./Apple-icon.png">
-          <img class="image2" src="./Apple-icon.png">
-          <img class="image3" src="./Apple-icon.png">
-          <img class="image4" src="./Apple-icon.png">
-          <img class="image5" src="./Apple-icon.png">
+          <img class="absolute image1" src="./Apple-icon.png">
+          <img class="absolute image2" src="./Apple-icon.png">
+          <img class="absolute image3" src="./Apple-icon.png">
+          <img class="absolute image4" src="./Apple-icon.png">
+          <img class="absolute image5" src="./Apple-icon.png">
+          <img class="absolute image6" src="./Apple-icon.png">
         </div>
         <div class="flex-col-end">
-          <canvas width="550px" height="200px"></canvas>
+          <div></div>
         </div>
         <div class="snake"></div>
+        <div class="snake2"></div>
       </section>
     `);
     var restartButton = gameOverScreen.querySelector('button');
@@ -117,7 +128,6 @@ function main() {
       }
     }
   }
-
   createSplashScreen();
 }
 
