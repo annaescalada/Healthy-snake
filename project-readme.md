@@ -34,6 +34,7 @@ Game
     this.level
     this.backgroundMusic
     this.eatSound
+    this.gameOverSound
 
   Methods:
     this.prototype.startGame()

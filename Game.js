@@ -12,6 +12,7 @@ function Game(canvas) {
   this.level = 1;
   this.backgroundMusic = new Audio('music/bensound-funkyelement.mp3');
   this.eatSound = new Audio('music/zapsplat_multimedia_notification_chime_bell_008_26408.mp3');
+  this.gameOverSound = new Audio ('music/zapsplat_sound_design_impact_slam_hit_hard_003_32201.mp3')
 }
 
 Game.prototype.startGame = function () {
@@ -49,6 +50,7 @@ Game.prototype.startGame = function () {
       requestAnimationFrame(loop);
     } else {
       this.onGameOver();
+      this.gameOverSound.play();
       this.backgroundMusic.pause();
     }
   }
@@ -86,6 +88,7 @@ Game.prototype.findFood = function () {
   if (leftRight || rightLeft || upDown || downUp || leftRightEnd || rightLeftEnd || upDownEnd || downUpEnd) { findFood = true };
 
   if (findFood) {
+    this.eatSound.currentTime = 0;
     this.eatSound.play();
     this.totalScore = this.totalScore + 10;
     this.newFood = true;
