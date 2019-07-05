@@ -14,6 +14,8 @@ function main() {
         <div class="flex-col-end">
           <h1>snake</h1>
           <h2>healthy snakes eat apples...</h2>
+          <p>Write your name and click start to play!</p>
+          <input id="player-name" placeholder="your name"></input>
           <button>Start</button>
           <img class="absolute image1" src="./styles/Apple-icon.png">
           <img class="absolute image2" src="./styles/Apple-icon.png">
@@ -31,12 +33,15 @@ function main() {
       </section>
     `);
     var startButton = splashScreen.querySelector('button');
-    startButton.addEventListener('click', createGameScreen);
+    var currentPlayerName = splashScreen.querySelector('input');
+    startButton.addEventListener('click', function() {
+      window.localStorage.setItem('currentPlayerName', currentPlayerName.value);
+      createGameScreen()
+    });
   }
 
-  function createGameScreen() {
+  function createGameScreen(playerName) {
     var gameScreen = buildDom(`
-    
     <section class="homescreen">
       <div class="flex-col-end">
         <img class="absolute image1" src="./styles/Apple-icon.png">
@@ -60,12 +65,11 @@ function main() {
         <canvas id="canvas" width="500px" height="500px"></canvas>
       </div>
     </section>
-
-
-
     `);
     var canvas = gameScreen.querySelector('canvas');
+    //var playerName = gameScreen.querySelector('player-name');
     var game = new Game(canvas);
+    //game.playerName = playerName.value;
     game.gameOverCallback(() => { createGameOverScreen(game.totalScore, game.level) });
     game.startGame();
     document.addEventListener('keydown', (event) => {
@@ -82,12 +86,58 @@ function main() {
   }
 
   function createGameOverScreen(score, level) {
+    var rankingStr = localStorage.getItem(`rankingArr`);
+    var rankingArr = JSON.parse(rankingStr);
+    if (rankingArr[0] === undefined) {
+      var name1 = '';
+      var score1 = '';
+      var level1 = '';
+    } else {
+      var firstPlayer = rankingArr[0];
+      var name1 = firstPlayer.name;
+      var score1 = firstPlayer.score;
+      var level1 = firstPlayer.level;
+    }
+    if (rankingArr[1] === undefined) {
+      var name2 = '';
+      var score2 = '';
+      var level2 = '';
+    } else {
+      var secondPlayer = rankingArr[1];
+      var name2 = secondPlayer.name;
+      var score2 = secondPlayer.score;
+      var level2 = secondPlayer.level;
+    }
+    if (rankingArr[2] === undefined) {
+      var name3 = '';
+      var score3 = '';
+      var level3 = '';
+    } else {
+      var thirdPlayer = rankingArr[2];
+      var name3 = thirdPlayer.name;
+      var score3 = thirdPlayer.score;
+      var level3 = thirdPlayer.level;
+    }
     var gameOverScreen = buildDom(`
-    <section class="homescreen">
+    <section class="homescreen game-over">
         <div class="flex-col-end">
           <h1>Game Over</h1>
-          <p id="gameover-score"><img id="apple-icon" src="./styles/Apple-icon.png" height="25"> Score = ${score}</p>
-          <p id="gameover-level"><img id="apple-icon" src="./styles/Trophy-icon.svg" height="25"> Level = ${level}</p>
+          <h2>Ranking:</h2>
+          <div class="ranking flex">
+            <p>#1 ${name1}</p>
+            <p><img  src="./styles/Apple-icon.png" height="25"> Score = ${score1}</p>
+            <p><img  src="./styles/Trophy-icon.svg" height="25"> Level = ${level1}</p>
+          </div>
+          <div class="ranking flex">
+            <p>#2 ${name2}</p>
+            <p><img  src="./styles/Apple-icon.png" height="25"> Score = ${score2}</p>
+            <p><img  src="./styles/Trophy-icon.svg" height="25"> Level = ${level2}</p>
+          </div>
+          <div class="ranking flex">
+            <p>#3 ${name3}</p>
+            <p><img  src="./styles/Apple-icon.png" height="25"> Score = ${score3}</p>
+            <p><img  src="./styles/Trophy-icon.svg" height="25"> Level = ${level3}</p>
+          </div>
           <button>Restart</button>
           <img class="absolute image1" src="./styles/Apple-icon.png">
           <img class="absolute image2" src="./styles/Apple-icon.png">
@@ -107,27 +157,7 @@ function main() {
     restartButton.addEventListener('click', createGameScreen);
   }
 
-  function styleCanvas(canvas, unitSize) {
-    var ctx = canvas.getContext('2d');
-    var columns = canvas.width / unitSize;
-    var rows = canvas.height / unitSize;
-    for (var i = 0; i < columns + 1; i++) {
-      for (var ii = 0; ii < rows; ii += 2) {
-        if (i % 2 === 0) {
-          ctx.fillStyle = '#AAD751';
-        } else {
-          ctx.fillStyle = '#A2D149';
-        }
-        ctx.fillRect(i * unitSize, ii * unitSize, unitSize, unitSize)
-        if (i % 2 !== 0) {
-          ctx.fillStyle = '#AAD751';
-        } else {
-          ctx.fillStyle = '#A2D149';
-        }
-        ctx.fillRect(i * unitSize, (ii + 1) * unitSize, unitSize, unitSize);
-      }
-    }
-  }
+  //createGameOverScreen();
   createSplashScreen();
 }
 

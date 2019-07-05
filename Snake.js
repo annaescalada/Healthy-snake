@@ -70,7 +70,6 @@ Snake.prototype.draw = function() {
 }
 
 Snake.prototype.setDirection = function (newDirection) {
-  console.log(this)
 
   if(!this.isClicked) {
     this.setCliked();

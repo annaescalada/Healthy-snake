@@ -49,6 +49,7 @@ Game
     this.prototype.checkInSnake();
     this.prototype.styleCanvas();
     prototype.setSpeed();
+    this.ranking();
 
 Snake
 

@@ -12,7 +12,8 @@ function Game(canvas) {
   this.level = 1;
   this.backgroundMusic = new Audio('music/bensound-funkyelement.mp3');
   this.eatSound = new Audio('music/zapsplat_multimedia_notification_chime_bell_008_26408.mp3');
-  this.gameOverSound = new Audio ('music/zapsplat_sound_design_impact_slam_hit_hard_003_32201.mp3')
+  this.gameOverSound = new Audio ('music/zapsplat_sound_design_impact_slam_hit_hard_003_32201.mp3');
+  this.playerName;
 }
 
 Game.prototype.startGame = function () {
@@ -49,9 +50,9 @@ Game.prototype.startGame = function () {
     if (!this.isGameOver) {
       requestAnimationFrame(loop);
     } else {
-      this.onGameOver();
       this.gameOverSound.play();
       this.backgroundMusic.pause();
+      this.onGameOver();
     }
   }
   loop();
@@ -137,6 +138,7 @@ Game.prototype.checkCollisions = function () {
     if (index > 0) {
       collision = (this.snake.positions[0].x === position.x && this.snake.positions[0].y === position.y);
       if (collision) {
+        this.ranking();
         this.isGameOver = true;
       }
     }
@@ -206,4 +208,22 @@ Game.prototype.setSpeed =function () {
       break;
   }
   return speed;
+}
+
+Game.prototype.ranking = function() {
+  var rankingStr = localStorage.getItem(`rankingArr`);
+  var currentPlayerName = localStorage.getItem(`currentPlayerName`);
+  
+  var rankingArr = JSON.parse(rankingStr);
+  
+  var playerResult = {name: currentPlayerName, score: this.totalScore, level:this.level};
+  if (rankingArr === null) {
+    var sortedRankingArr = [playerResult];
+  } else {
+      rankingArr.push(playerResult);
+      var sortedRankingArr = rankingArr.sort((player1, player2) => {
+        return player2.score - player1.score;
+      });
+    }
+  localStorage.setItem('rankingArr', JSON.stringify(sortedRankingArr));
 }
